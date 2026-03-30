@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: hivejobs
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.8
+    ports:
+      - "7700:7700"
+    environment:
+      MEILI_ENV: development
+    volumes:
+      - meili_data:/meili_data
+
+volumes:
+  pg_data:
+  meili_data:
